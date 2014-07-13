@@ -16,21 +16,33 @@ $(document).ready(function(){
 
   $("#left").on('click',function(){
       if (($("#img1").attr('src') === imgSrc1)) {
+        $("#img1").css('opacity',0);
         $("#img1").attr('src', imgSrc3);
+        $("#img1").animate({opacity:1});
       } else if ($("#img1").attr('src') === imgSrc2) {
+        $("#img1").css('opacity',0);
         $("#img1").attr('src', imgSrc1);
+        $("#img1").animate({opacity:1});
       } else if ($("#img1").attr('src') === imgSrc3) {
+        $("#img1").css('opacity',0);
         $("#img1").attr('src', imgSrc2);
+        $("#img1").animate({opacity:1});
       }
   });
 
   $("#right").on('click',function(){
       if (($("#img1").attr('src') === imgSrc1)) {
+        $("#img1").css('opacity',0);
         $("#img1").attr('src', imgSrc2);
+        $("#img1").animate({opacity:1});
       } else if ($("#img1").attr('src') === imgSrc2) {
+        $("#img1").css('opacity',0);
         $("#img1").attr('src', imgSrc3);
+        $("#img1").animate({opacity:1});
       } else if ($("#img1").attr('src') === imgSrc3) {
+        $("#img1").css('opacity',0);
         $("#img1").attr('src', imgSrc1);
+        $("#img1").animate({opacity:1});
       }
   });
 
