@@ -8,6 +8,10 @@
   src: url('resources/bonzai.ttf');
 }
 
+@font-face {
+  font-family: typeWriter;
+  src: url("resources/TravelingTypewriter.ttf") format("opentype");
+}
 
 body {
   text-align: center;
@@ -147,13 +151,14 @@ img {
   color: #6d746f;
 }
 
-#project {
-  height: 1080px;
+#calendarSection {
   background-image: url('resources/food.png');
-  color: #00C2AA;
+  /*color: #00C2AA;*/
+  color:white;
+  font-family:typeWriter;
 }
 
-#project h1 {
+#calendarSection h1 {
   margin: 0;
   font-weight: 700;
   font-size: 60px;

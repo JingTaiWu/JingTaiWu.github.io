@@ -1,3 +1,6 @@
+//making this variable global to get all the events
+var eventsFromParse = [];
+
 $(document).ready(function(){
 
 //div effects
@@ -46,7 +49,7 @@ $(document).ready(function(){
       }
   });
 
-//scroll to a div function
+//scroll to a div function (navigation bar)
   function scrollToDiv (id){
     id = id.replace("link", "");
     $('html,body').animate({scrollTop: $("#"+id).offset().top - 70},'fast');
@@ -57,4 +60,32 @@ $(document).ready(function(){
     scrollToDiv($(this).attr('id'));
     return false;
   })
+
+//parsing json object
+$.ajax({
+  url: "https://api.parse.com/1/classes/Calendar",
+  type: "GET",
+  headers: {"X-Parse-Application-Id": "uJ4V4GqHDAKyzh3DUYVrkw9RMdfL64mBL2MmW5b2",
+            "X-Parse-REST-API-Key": "3UIRVoMGUcCBXoiRKK8RIGE5eCqywONMIzKFBulY"},
+  success: function(data){
+    for (var i = 0; i < data.results.length; i++){
+      eventsFromParse.push($.parseJSON(data.results[i].event));
+    }
+    console.log(eventsFromParse);
+    $("#calendar").fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+      },
+      events: eventsFromParse
+    });
+  },
+
+  error: function(e){
+    console.log("Failed to load Calendar Data");
+    console.log(e);
+  }
+});
+
 });

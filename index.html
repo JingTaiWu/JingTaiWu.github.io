@@ -7,6 +7,10 @@
 <!-- Fancy Box -->
 <link rel="stylesheet" href="scripts/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
 <script type="text/javascript" src="scripts/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Calendar -->
+<link rel='stylesheet' href='scripts/fullcalendar/fullcalendar.css' />
+<script src='scripts/fullcalendar/lib/moment.min.js'></script>
+<script src='scripts/fullcalendar/fullcalendar.js'></script>
 <!-- fonts -->
 <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 <!-- Implementation -->
@@ -22,7 +26,7 @@
         <li><a id = "headerlink" href="#header">Greetings</a></li>
         <li><a id = "gallerylink" href="#gallery">Pictures of Me</a></li>
         <li><a id = "aboutlink" href="#about">About Me</a></li>
-        <li><a id = "projectlink" href="#project">Projects</a></li>
+        <li><a id = "calendarSectionlink" href="#calendar">Calendar</a></li>
       </ul>
     </div>
     <div id="header">
@@ -67,8 +71,12 @@
           <br>
       </div>
     </div>
-    <div id="project">
-      <h1>Projects</h1>
+    <div id="calendarSection">
+      <h1>My Calendar</h1>
+      <div id="calendar">
+      </div>
+      <span>*Uses jQuery FullCalendar Plugin<br></span>
+      <span>*Uses Parse.com to post and get event objects.</span>
     </div>
 
     <div id="footer">
