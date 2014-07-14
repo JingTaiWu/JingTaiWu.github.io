@@ -49,6 +49,7 @@ img {
   opacity: 0.9;
   text-align: center;
   background-image: url('resources/congruent_outline.png');
+  overflow-x:auto;
 }
 
 #nav ul{
@@ -153,9 +154,10 @@ img {
 
 #calendarSection {
   background-image: url('resources/food.png');
-  /*color: #00C2AA;*/
   color:white;
   font-family:typeWriter;
+  padding: 0 0 50px 0;
+  float: none;
 }
 
 #calendarSection h1 {
@@ -163,9 +165,13 @@ img {
   font-weight: 700;
   font-size: 60px;
   padding-top: 40px;
+  text-align: center;
 }
 
+
 #addEvent {
+  display: block;
+  float: right;
   width: 200px;
   height: 30px;
   font-size: 30px;
@@ -174,6 +180,7 @@ img {
   font-family: bonzai;
 }
 
+
 #footer {
   font-family: transformer;
   font-size: 25px;
@@ -181,6 +188,7 @@ img {
   height: 100px;
   color: white;
   background-image: url('resources/congruent_outline.png');
+  padding: 20px 0 20px 0;
 }
 
 #footer p {
