@@ -33,6 +33,28 @@ img {
   display: inline-block;
 }
 
+label {
+  display: inline-block;
+  width: 130px;
+  text-align: center;
+}
+
+.border {
+  border-style: dotted;
+  border-color: #FF8B19;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/*datepicker's z index is not right with dialog*/
+.ui-datepicker {
+  z-index: 9999 !important;
+}
+/*colorpicker's z index is wrong also*/
+.colorpicker {
+  z-index: 9999 !important;
+}
+
 .container {
   width: 100%;
   text-align: center;
@@ -170,12 +192,11 @@ img {
 #addEvent {
   display: block;
   float: right;
-  width: 200px;
+  margin-top: 20px;
+  /*width: 200px;
   height: 30px;
   font-size: 30px;
-  margin-top: 20px;
-  padding: 0 0 10px 0;
-  font-family: bonzai;
+  padding: 0 0 10px 0;*/
 }
 
 

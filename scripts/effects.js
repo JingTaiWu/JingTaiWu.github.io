@@ -15,7 +15,8 @@ $(document).ready(function(){
   var imgSrc2 = "resources/megrey.png";
   var imgSrc3 = "resources/meSunny.png";
 
-  $("#left").on('click',function(){
+  $("#left").on('click',function(event){
+    event.preventDefault();
       if (($("#img1").attr('src') === imgSrc1)) {
         $("#img1").css('opacity',0);
         $("#img1").attr('src', imgSrc3);
@@ -31,7 +32,8 @@ $(document).ready(function(){
       }
   });
 
-  $("#right").on('click',function(){
+  $("#right").on('click',function(event){
+    event.preventDefault();
       if (($("#img1").attr('src') === imgSrc1)) {
         $("#img1").css('opacity',0);
         $("#img1").attr('src', imgSrc2);

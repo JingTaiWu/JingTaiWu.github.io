@@ -15,16 +15,21 @@
 <link rel='stylesheet' href='scripts/fullcalendar/fullcalendar.css' />
 <script src='scripts/fullcalendar/lib/moment.min.js'></script>
 <script src='scripts/fullcalendar/fullcalendar.js'></script>
+<!-- Color picker-->
+<link rel="stylesheet" media="screen" type="text/css" href="scripts/colorPicker/css/colorpicker.css" />
+<script type="text/javascript" src="scripts/colorPicker/js/colorpicker.js"></script>
 <!-- Parse -->
 <script src='scripts/parse-1.2.19.js'></script>
 <!-- fonts -->
 <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+<!-- Watermark -->
+<script type="text/javascript" src="scripts/jquery.watermark.min.js"></script>
 <!-- Implementation -->
 <script src="scripts/effects.js"></script>
 <script src="scripts/calendar.js"></script>
 <script src="scripts/jquery.corner.js"></script>
 
-<title>Jing's Website</title>
+<title>Jing's Realm</title>
 </head>
 
 <body>
@@ -83,7 +88,7 @@
       <h1>My Calendar</h1>
       <div id="calendar">
       </div>
-      <div class="button" id="addEvent">Add Event</div>
+      <div id="addEvent">Add Event</div>
       <br>
       <span>*Uses jQuery FullCalendar Plugin<br></span>
     </div>
@@ -100,9 +105,9 @@
 
 <!-- Authentication dialog -->
 <div id="authentication" title="Authentication">
-  <p>Please No Messrino With My Content<p>
+  <p>Please No Messrino With My Contentrino<p>
   <form>
-    <fieldset style = "border:0">
+    <fieldset style="border:0">
       <label for="user">Username: </label>
       <input type="text" name="user" id="user" class="text ui-widget-content ui-corner-all"/>
       <br>
@@ -113,4 +118,37 @@
   </form>
 </div>
 
+<!-- Add Event Dialog -->
+<div id="addEventDialog" title="Add New Event">
+  <form>
+    <fieldset style="border:0">
+      <label for="eventTitle">Event Title: </label>
+      <input type="text" name="eventTitle" id="eventTitle" class="text ui-widget-content ui-corner-all "/>
+      <br>
+      <br>
+      <div class="border">
+      <label for="eventStart">Start: </label>
+      <input type="text" name="eventStart" id="eventStart" class="text ui-widget-content ui-corner-all datepicker"/>
+      <br>
+      <br>
+      <label for="eventStartTime">Time: </label>
+      <input type="text" name="eventStartTime" id="eventStartTime" class="text ui-widget-content ui-corner-all"/>
+      </div>
+      <br>
+      <br>
+      <div class="border">
+      <label for="eventEnd">End: </label>
+      <input type="text" name="eventEnd" id="eventEnd" class="text ui-widget-content ui-corner-all datepicker"/>
+      <br>
+      <br>
+      <label for="eventStartTime">Time: </label>
+      <input type="text" name="eventStartTime" id="eventStartTime" class="text ui-widget-content ui-corner-all"/>
+      </div>
+      <br>
+      <br>
+      <label for="eventColor">Event Color: </label>
+      <input type="text" name="eventColor" id="eventColor" class="text ui-widget-content ui-corner-all"/>
+    </fieldset>
+  </form>
+</div>
 </html>
