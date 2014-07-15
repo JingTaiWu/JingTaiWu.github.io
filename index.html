@@ -4,6 +4,10 @@
 <link href="style.css" rel="stylesheet" />
 <!-- Jquery -->
 <script src="scripts\jquery-1.11.1.js"></script>
+<!-- Jquery UI -->
+<link rel="stylesheet" href="scripts/jquery-ui/jquery-ui.min.css">
+<script src="scripts/jquery-ui/external/jquery/jquery.js"></script>
+<script src="scripts/jquery-ui/jquery-ui.min.js"></script>
 <!-- Fancy Box -->
 <link rel="stylesheet" href="scripts/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
 <script type="text/javascript" src="scripts/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
@@ -11,12 +15,15 @@
 <link rel='stylesheet' href='scripts/fullcalendar/fullcalendar.css' />
 <script src='scripts/fullcalendar/lib/moment.min.js'></script>
 <script src='scripts/fullcalendar/fullcalendar.js'></script>
+<!-- Parse -->
+<script src='scripts/parse-1.2.19.js'></script>
 <!-- fonts -->
 <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 <!-- Implementation -->
 <script src="scripts/effects.js"></script>
-<script src="scripts/jquery.corner.js"></script>
 <script src="scripts/calendar.js"></script>
+<script src="scripts/jquery.corner.js"></script>
+
 <title>Jing's Website</title>
 </head>
 
@@ -90,5 +97,20 @@
     </div>
   </div>
 </body>
+
+<!-- Authentication dialog -->
+<div id="authentication" title="Authentication">
+  <p>Please No Messrino With My Content<p>
+  <form>
+    <fieldset style = "border:0">
+      <label for="user">Username: </label>
+      <input type="text" name="user" id="user" class="text ui-widget-content ui-corner-all"/>
+      <br>
+      <br>
+      <label for="pass">Password: </label>
+      <input type="password" name="pass" id="pass" class="text ui-widget-content ui-corner-all"/>
+    </fieldset>
+  </form>
+</div>
 
 </html>

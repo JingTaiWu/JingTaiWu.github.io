@@ -81,7 +81,6 @@ img {
 #header {
   width: 100%;
   height: 1010px;
-  margin-top: 70px;
   background-image: url('resources/geometry2.png');
 }
 
@@ -93,7 +92,6 @@ img {
   letter-spacing: 2px;
   top: 39%;
   position: relative;
-  margin: auto;
 }
 
 #name {
@@ -233,7 +231,8 @@ img {
    background: #4a5054;
    }
 
-#left, #right{
+/*This disables selecting the text in the button*/
+#left, #right,#addEvent{
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;

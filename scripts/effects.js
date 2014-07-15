@@ -47,6 +47,8 @@ $(document).ready(function(){
       }
   });
 
+//$()
+
 //scroll to a div function (navigation bar)
   function scrollToDiv (id){
     id = id.replace("link", "");
