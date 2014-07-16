@@ -55,6 +55,8 @@ $(document).ready(function(){
 
   $("#eventStartTime, #eventEndTime").watermark("HH:MM:SS");
 
+  $("#eventStartTime, #eventEndTime").timepicker({'timeFormat': 'H:i:s'});
+
   //initialization for autheticating dialog
   authDialog = $("#authentication").dialog({
                   autoOpen: false,
