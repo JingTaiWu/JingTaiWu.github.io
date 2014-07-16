@@ -4,7 +4,9 @@ $(document).ready(function(){
   Parse.initialize("uJ4V4GqHDAKyzh3DUYVrkw9RMdfL64mBL2MmW5b2", "L2dleaK9mHGa14CFlqOw2WtEC5dcPlvYrCnrg1Vo");
 
   //initialization for calendar
-  reloadCalendar();
+  $("#calendar").fullCalendar();
+  //load the data into the calendar
+  loadCalendar();
 
   //initializaion for add event dialog along with styling for input boxes
   addEventDialog = $("#addEventDialog").dialog({
@@ -14,9 +16,14 @@ $(document).ready(function(){
                     modal: true,
                     buttons: {
                       "Add Event": function(){
+                        //creates the event object
                         var eventobject = {
-
+                            title: $("#eventTitle").val(),
+                            start: $("#eventStart").val() + "T" + $("#eventStartTime").val(),
+                            end: $("#eventEnd").val() + "T" + $("#eventEndTime").val(),
+                            color: "#" + $("#eventColor").val()
                         };
+                        addEvent(eventobject);
                       },
                       "Cancel" : function(){
                         addEventDialog.dialog('close');
@@ -42,7 +49,7 @@ $(document).ready(function(){
               		$(el).val(hex);
               		$(el).ColorPickerHide();
               	},
-                onChange: function (hsb, hex, rgb) {
+                  onChange: function (hsb, hex, rgb) {
 		              $('#eventColor').val(hex);
 	              }
   });
@@ -70,7 +77,7 @@ $(document).ready(function(){
                   },
                  hide: {
                     effect: "fade",
-                    duration: 500
+                    duration: 1000
                   }
                 });
 
@@ -110,7 +117,7 @@ function autheticate(username, password){
 
 
 //add event function
-function addEvent(eventobject){
+function addEventREST(eventobject){
   $.ajax({
     url: "https://api.parse.com/1/classes/Calendar",
     type: "POST",
@@ -119,17 +126,22 @@ function addEvent(eventobject){
               "Content-Type" : "application/json"},
     data: eventobject,
     success: function(data){
-      console.log("Add Event Successful.");
+      alert("Add Event Successful.");
       console.log("Here is the location of the Object: " + data.Location);
+      loadCalendar();
     },
     error: function(){
-      console.log("Add Event Failed.");
+      alert("Add Event Failed.");
     }
   });
 }
 
+function addEventJs(event){
+
+}
+
 //reload the calendar (if the user updates the calendar, calendar should reload)
-function reloadCalendar(){
+function loadCalendar(){
   //ajax call
   $.ajax({
     url: "https://api.parse.com/1/classes/Calendar",
