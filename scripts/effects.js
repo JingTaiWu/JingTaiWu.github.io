@@ -49,7 +49,8 @@ $(document).ready(function(){
       }
   });
 
-//$()
+//my gallery
+  $(".fancybox").fancybox();
 
 //scroll to a div function (navigation bar)
   function scrollToDiv (id){

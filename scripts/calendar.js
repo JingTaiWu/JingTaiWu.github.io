@@ -6,7 +6,7 @@ $(document).ready(function(){
   //initialization for calendar
   $("#calendar").fullCalendar();
   //load the data into the calendar
-  loadCalendar();
+  loadCalendarJS();
 
   //initializaion for add event dialog along with styling for input boxes
   addEventDialog = $("#addEventDialog").dialog({
@@ -16,14 +16,7 @@ $(document).ready(function(){
                     modal: true,
                     buttons: {
                       "Add Event": function(){
-                        //creates the event object
-                        var eventobject = {
-                            title: $("#eventTitle").val(),
-                            start: $("#eventStart").val() + "T" + $("#eventStartTime").val(),
-                            end: $("#eventEnd").val() + "T" + $("#eventEndTime").val(),
-                            color: "#" + $("#eventColor").val()
-                        };
-                        addEvent(eventobject);
+                        addEventJs();
                       },
                       "Cancel" : function(){
                         addEventDialog.dialog('close');
@@ -98,6 +91,9 @@ $(document).ready(function(){
   });
 });
 
+//document ready ends here--------------------------------------------
+//UDF starts here-----------------------------------------------------
+
 //autheticating the user
 function autheticate(username, password){
     Parse.User.logIn(username, password, {
@@ -137,11 +133,101 @@ function addEventREST(eventobject){
 }
 
 function addEventJs(event){
+  //initialization for add event status
+  $("#addEventStatusDialog").dialog({
+    autoOpen: false,
+    modal: true,
+    height: 351,
+    width: 535,
+    buttons: {
+      "Okay" : function(){
+        this.dialog("close");
+        $("#addEventStatusDialog").empty();
+      },
+    show: {
+       effect: "fade",
+       duration: 500
+     },
+    hide: {
+       effect: "fade",
+       duration: 500
+     }
+    }
+  });
 
+  //instantiate
+  var CalendarClass = Parse.Object.extend("Calendar");
+  var eventObject = new CalendarClass();
+  if(validateTimeFormat($("#eventStartTime").val()) !== true){
+    alert("Your event start time isn't in the right format!");
+  }
+  else if(validateTimeFor($("#eventEndTime").val()) !== true){
+    alert("Your event end time isn't in the right format!");
+  } else {
+    //add the object
+    eventObject.set("title", $("#eventTitle").val());
+    eventObject.set("start", $("#eventStart").val() + "T" + $("#eventStartTime").val());
+    eventObject.set("end", $("#eventEnd").val() + "T" + $("#eventEndTime").val());
+    eventObject.set("eventColor", "#" + $("#eventColor").val());
+
+    //save the object to the server
+    eventObject.save(null, {
+      success: function(eventObject){
+        console.log("Event successfully added!");
+        console.log("Event Object:");
+        console.log(eventObject);
+        $("#addEventStatusDialog").append("<p>" + "Event successfully added!" + "</p>");
+        $("#addEventStatusDialog").dialog("open");
+        loadCalendarJS();
+      },
+      error: function(eventObject, error){
+        console.log("Failed to add event!");
+        console.log("Error: " + error.message);
+        $("#addEventStatusDialog").append("<p>" + "Failed to add event!" + "</p>");
+        $("#addEventStatusDialog").dialog("open");
+      }
+    });
+  }
+}
+
+//reload the calendar after any calendar updates
+function loadCalendarJS(){
+  //Parse object queries setup
+  var CalendarClass = Parse.Object.extend("Calendar");
+  var query = new Parse.Query(CalendarClass);
+  //you can set up intersting query constraints
+  //quert.equalTo
+
+  //find returns the query result
+  query.find({
+    success: function(results){
+      var events = [];
+      for(var youTheShitz = 0; youTheShitz < results.length; youTheShitz++){
+        events.push(results[youTheShitz].attributes);
+      }
+      $("#calendar").fullCalendar('destroy');
+      $("#calendar").fullCalendar({
+        theme: true,
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay'
+        },
+        events: events
+      });
+    },
+    error: function(error){
+      console.log("This is what went wrong: " + error.message);
+    }
+  });
 }
 
 //reload the calendar (if the user updates the calendar, calendar should reload)
-function loadCalendar(){
+function loadCalendarREST(){
+  //Parse object queries setup
+  var CalendarClass = Parse.Object.extend("Calendar");
+  var query = new Parse.Query(CalendarClass);
+  query.find
   //ajax call
   $.ajax({
     url: "https://api.parse.com/1/classes/Calendar",
@@ -170,4 +256,12 @@ function loadCalendar(){
       console.log("Failed to load Calendar Data");
     }
   });
+}
+
+//check for valid time input
+function validateTimeFormat(checkString){
+  //regular Experssion, omg fav
+  var regEx = /^([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$/;
+  var result = regEx.test(checkString);
+  return result;
 }
