@@ -17,6 +17,7 @@ $(document).ready(function(){
                     buttons: {
                       "Add Event": function(){
                         addEventJs();
+                        addEventDialog.dialog('close');
                       },
                       "Cancel" : function(){
                         addEventDialog.dialog('close');
@@ -134,26 +135,26 @@ function addEventREST(eventobject){
 
 function addEventJs(event){
   //initialization for add event status
-  $("#addEventStatusDialog").dialog({
-    autoOpen: false,
-    modal: true,
-    height: 351,
-    width: 535,
-    buttons: {
-      "Okay" : function(){
-        this.dialog("close");
-        $("#addEventStatusDialog").empty();
-      },
-    show: {
-       effect: "fade",
-       duration: 500
-     },
-    hide: {
-       effect: "fade",
-       duration: 500
-     }
-    }
-  });
+//  $("#addEventStatusDialog").dialog({
+//    autoOpen: false,
+//    modal: true,
+//    height: 351,
+//    width: 535,
+//    buttons: {
+//      "Okay" : function(){
+//        this.dialog("close");
+//        $("#addEventStatusDialog").empty();
+//      },
+//    show: {
+//       effect: "fade",
+//       duration: 500
+//     },
+//    hide: {
+//       effect: "fade",
+//       duration: 500
+//     }
+//    }
+//  });
 
   //instantiate
   var CalendarClass = Parse.Object.extend("Calendar");
@@ -161,7 +162,7 @@ function addEventJs(event){
   if(validateTimeFormat($("#eventStartTime").val()) !== true){
     alert("Your event start time isn't in the right format!");
   }
-  else if(validateTimeFor($("#eventEndTime").val()) !== true){
+  else if(validateTimeFormat($("#eventEndTime").val()) !== true){
     alert("Your event end time isn't in the right format!");
   } else {
     //add the object
@@ -176,8 +177,6 @@ function addEventJs(event){
         console.log("Event successfully added!");
         console.log("Event Object:");
         console.log(eventObject);
-        $("#addEventStatusDialog").append("<p>" + "Event successfully added!" + "</p>");
-        $("#addEventStatusDialog").dialog("open");
         loadCalendarJS();
       },
       error: function(eventObject, error){
