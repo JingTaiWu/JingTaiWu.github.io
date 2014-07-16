@@ -29,12 +29,12 @@ $(document).ready(function(){
                       }
                     },
                     show: {
-                       effect: "blind",
+                       effect: "fade",
                        duration: 500
                      },
                     hide: {
                        effect: "fade",
-                       duration: 500
+                       duration: 1000
                      }
   });
 
@@ -74,11 +74,11 @@ $(document).ready(function(){
                   },
                  show: {
                     effect: "fade",
-                    duration: 500
+                    duration: 1000
                   },
                  hide: {
                     effect: "fade",
-                    duration: 500
+                    duration: 1000
                   }
                 });
 
@@ -107,14 +107,15 @@ function autheticate(username, password){
   var result;
     Parse.User.logIn(username, password, {
       success: function(user){
-        alert("Login Successful");
+        //alert("Login Successful");
         authDialog.dialog('close');
         $("#user").val(''); $("#pass").val('');
         addEventDialog.dialog("open");
         result= true;
       },
       error: function(user, error){
-        alert("Login failed, Try Again");
+        $("#authentication").effect("shake", 500);
+        //alert("Login failed, Try Again");
 
         result = false;
       }
