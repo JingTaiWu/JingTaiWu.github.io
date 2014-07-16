@@ -3,6 +3,9 @@ $(document).ready(function(){
   //initailization for parse API
   Parse.initialize("uJ4V4GqHDAKyzh3DUYVrkw9RMdfL64mBL2MmW5b2", "L2dleaK9mHGa14CFlqOw2WtEC5dcPlvYrCnrg1Vo");
 
+  //initailization for array of events (for update)
+  events = [];
+
   //initialization for calendar
   $("#calendar").fullCalendar();
   //load the data into the calendar
@@ -165,9 +168,10 @@ function loadCalendarJS(){
   //find returns the query result
   query.find({
     success: function(results){
-      var events = [];
+      events = results;
+      var tempList = [];
       for(var youTheShitz = 0; youTheShitz < results.length; youTheShitz++){
-        events.push(results[youTheShitz].attributes);
+        tempList.push(results[youTheShitz].attributes);
       }
       $("#calendar").fullCalendar('destroy');
       $("#calendar").fullCalendar({
@@ -177,7 +181,7 @@ function loadCalendarJS(){
           center: 'title',
           right: 'month,agendaWeek,agendaDay'
         },
-        events: events
+        events: tempList
       });
     },
     error: function(error){
@@ -190,7 +194,7 @@ function loadCalendarJS(){
 //check for valid time input
 function validateTimeFormat(checkString){
   //regular Experssion, omg fav
-  var regEx = /^([0-1]*[0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$/;
+  var regEx = /^([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$/;
   var result = regEx.test(checkString);
   return result;
 }
