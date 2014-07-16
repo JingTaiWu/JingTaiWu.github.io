@@ -16,8 +16,10 @@ $(document).ready(function(){
                     modal: true,
                     buttons: {
                       "Add Event": function(){
-                        addEventJs();
-                        addEventDialog.dialog('close');
+                        var eventAdded = addEventJs();
+                        if(eventAdded){
+                          addEventDialog.dialog('close');
+                        }
                       },
                       "Cancel" : function(){
                         addEventDialog.dialog('close');
@@ -66,12 +68,12 @@ $(document).ready(function(){
                     }
                   },
                  show: {
-                    effect: "blind",
+                    effect: "fade",
                     duration: 500
                   },
                  hide: {
                     effect: "fade",
-                    duration: 1000
+                    duration: 500
                   }
                 });
 
@@ -97,73 +99,36 @@ $(document).ready(function(){
 
 //autheticating the user
 function autheticate(username, password){
+  var result;
     Parse.User.logIn(username, password, {
       success: function(user){
         alert("Login Successful");
         authDialog.dialog('close');
         $("#user").val(''); $("#pass").val('');
-
-        //procceed to add event
-        addEventDialog.dialog('open');
+        addEventDialog.dialog("open");
+        result= true;
       },
       error: function(user, error){
         alert("Login failed, Try Again");
+
+        result = false;
       }
     });
+    return result;
 }
 
-
-//add event function
-function addEventREST(eventobject){
-  $.ajax({
-    url: "https://api.parse.com/1/classes/Calendar",
-    type: "POST",
-    headers: {"X-Parse-Application-Id": "uJ4V4GqHDAKyzh3DUYVrkw9RMdfL64mBL2MmW5b2",
-              "X-Parse-REST-API-Key": "3UIRVoMGUcCBXoiRKK8RIGE5eCqywONMIzKFBulY",
-              "Content-Type" : "application/json"},
-    data: eventobject,
-    success: function(data){
-      alert("Add Event Successful.");
-      console.log("Here is the location of the Object: " + data.Location);
-      loadCalendar();
-    },
-    error: function(){
-      alert("Add Event Failed.");
-    }
-  });
-}
 
 function addEventJs(event){
-  //initialization for add event status
-//  $("#addEventStatusDialog").dialog({
-//    autoOpen: false,
-//    modal: true,
-//    height: 351,
-//    width: 535,
-//    buttons: {
-//      "Okay" : function(){
-//        this.dialog("close");
-//        $("#addEventStatusDialog").empty();
-//      },
-//    show: {
-//       effect: "fade",
-//       duration: 500
-//     },
-//    hide: {
-//       effect: "fade",
-//       duration: 500
-//     }
-//    }
-//  });
-
   //instantiate
   var CalendarClass = Parse.Object.extend("Calendar");
   var eventObject = new CalendarClass();
   if(validateTimeFormat($("#eventStartTime").val()) !== true){
     alert("Your event start time isn't in the right format!");
+    return false;
   }
   else if(validateTimeFormat($("#eventEndTime").val()) !== true){
     alert("Your event end time isn't in the right format!");
+    return false;
   } else {
     //add the object
     eventObject.set("title", $("#eventTitle").val());
@@ -182,10 +147,10 @@ function addEventJs(event){
       error: function(eventObject, error){
         console.log("Failed to add event!");
         console.log("Error: " + error.message);
-        $("#addEventStatusDialog").append("<p>" + "Failed to add event!" + "</p>");
-        $("#addEventStatusDialog").dialog("open");
       }
     });
+
+    return true;
   }
 }
 
@@ -221,46 +186,11 @@ function loadCalendarJS(){
   });
 }
 
-//reload the calendar (if the user updates the calendar, calendar should reload)
-function loadCalendarREST(){
-  //Parse object queries setup
-  var CalendarClass = Parse.Object.extend("Calendar");
-  var query = new Parse.Query(CalendarClass);
-  query.find
-  //ajax call
-  $.ajax({
-    url: "https://api.parse.com/1/classes/Calendar",
-    type: "GET",
-    headers: {"X-Parse-Application-Id": "uJ4V4GqHDAKyzh3DUYVrkw9RMdfL64mBL2MmW5b2",
-              "X-Parse-REST-API-Key": "3UIRVoMGUcCBXoiRKK8RIGE5eCqywONMIzKFBulY"},
-    success: function(data){
-
-      var eventsFromParse = [];
-      for (var i = 0; i < data.results.length; i++){
-        eventsFromParse.push(data.results[i].eventObject);
-      }
-      //destroy the old calendar first
-      $("#calendar").fullCalendar('destroy');
-      $("#calendar").fullCalendar({
-        theme: true,
-        header: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'month,agendaWeek,agendaDay'
-        },
-        events: eventsFromParse
-      });
-    },
-    error: function(e){
-      console.log("Failed to load Calendar Data");
-    }
-  });
-}
 
 //check for valid time input
 function validateTimeFormat(checkString){
   //regular Experssion, omg fav
-  var regEx = /^([0-1][0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$/;
+  var regEx = /^([0-1]*[0-9]|[2][0-3]):([0-5][0-9]):([0-5][0-9])$/;
   var result = regEx.test(checkString);
   return result;
 }
