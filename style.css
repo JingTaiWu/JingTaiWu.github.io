@@ -24,6 +24,10 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  cursor: pointer;
+}
+
 img {
   height: 600px;
   vertical-align: middle;
@@ -255,13 +259,17 @@ label {
    }
 
 /*This disables selecting the text in the button*/
-#left, #right,#addEvent{
+#left, #right,#addEvent,#Login{
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+#Login: hover{
+  cursor:pointer;
 }
 
 #calendar {

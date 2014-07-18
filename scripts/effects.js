@@ -58,7 +58,7 @@ $(document).ready(function(){
     $('html,body').animate({scrollTop: $("#"+id).offset().top - 70},'fast');
   };
 
-  $("#nav > ul > li > a").click(function(e){
+  $("#headerlink,#gallerylink,#aboutlink,#calendarSectionlink").click(function(e){
     e.preventDefault();
     scrollToDiv($(this).attr('id'));
     return false;

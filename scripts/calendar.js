@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
   //initailization for parse API
   Parse.initialize("uJ4V4GqHDAKyzh3DUYVrkw9RMdfL64mBL2MmW5b2", "L2dleaK9mHGa14CFlqOw2WtEC5dcPlvYrCnrg1Vo");
 
@@ -57,6 +56,12 @@ $(document).ready(function(){
 
   $("#eventStartTime, #eventEndTime").timepicker({'timeFormat': 'H:i:s'});
 
+  //check log in status
+  if(Parse.User.current()){
+    $("#login").text("Log Out");
+  } else {
+    $("#login").text("Log In");
+  }
   //initialization for autheticating dialog
   authDialog = $("#authentication").dialog({
                   autoOpen: false,
@@ -83,12 +88,27 @@ $(document).ready(function(){
                 });
 
 
-
+  //log in
+  $("#nav ul li:nth-child(5) a").on('click',function(event ){
+    event.preventDefault();
+    if(Parse.User.current()){
+      Parse.User.logOut();
+      $("#login").text("Log In");
+    } else {
+      authDialog.dialog("open");
+    }
+  })
   //add event button listener
   $("#addEvent").on('click',function(event){
     //open the dialog
     event.preventDefault();
-    authDialog.dialog("open");
+    var currentUser = Parse.User.current();
+    //authDialog.dialog("open");
+    if(currentUser){
+      addEventDialog.dialog("open");
+    } else {
+      alert("Please log in first");
+    }
   });
   //login input listenser
   $("#pass").on('keyup',function(event){
@@ -110,7 +130,7 @@ function autheticate(username, password){
         //alert("Login Successful");
         authDialog.dialog('close');
         $("#user").val(''); $("#pass").val('');
-        addEventDialog.dialog("open");
+        $("#login").text("Log Out");
         result= true;
       },
       error: function(user, error){
@@ -140,7 +160,8 @@ function addEventJs(event){
     eventObject.set("title", $("#eventTitle").val());
     eventObject.set("start", $("#eventStart").val() + "T" + $("#eventStartTime").val());
     eventObject.set("end", $("#eventEnd").val() + "T" + $("#eventEndTime").val());
-    eventObject.set("eventColor", "#" + $("#eventColor").val());
+    eventObject.set("color", "#" + $("#eventColor").val());
+    eventObject.set("editable", true);
 
     //save the object to the server
     eventObject.save(null, {
