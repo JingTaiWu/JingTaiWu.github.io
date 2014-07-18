@@ -89,7 +89,7 @@ $(document).ready(function(){
 
 
   //log in
-  $("#nav ul li:nth-child(5) a").on('click',function(event ){
+  $("#log_in").on('click',function(event ){
     event.preventDefault();
     if(Parse.User.current()){
       Parse.User.logOut();
@@ -125,21 +125,26 @@ $(document).ready(function(){
 //autheticating the user
 function autheticate(username, password){
   var result;
-    Parse.User.logIn(username, password, {
-      success: function(user){
-        //alert("Login Successful");
-        authDialog.dialog('close');
-        $("#user").val(''); $("#pass").val('');
-        $("#login").text("Log Out");
-        result= true;
-      },
-      error: function(user, error){
-        $("#authentication").effect("shake", 500);
-        //alert("Login failed, Try Again");
+    if ($("#user").val('') === "" || $("#pass").val('') === ""){
+      $("#authentication").effect("shake", 500);
+    } else {
+      Parse.User.logIn(username, password, {
+        success: function(user){
+          //alert("Login Successful");
+          authDialog.dialog('close');
+          $("#user").val(''); $("#pass").val('');
+          $("#login").text("Log Out");
+          result= true;
+        },
+        error: function(user, error){
+          $("#authentication").effect("shake", 500);
+          //alert("Login failed, Try Again");
 
-        result = false;
-      }
-    });
+          result = false;
+        }
+      });
+    }
+
     return result;
 }
 
