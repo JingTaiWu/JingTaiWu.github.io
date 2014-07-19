@@ -13,6 +13,11 @@
   src: url("resources/TravelingTypewriter.ttf") format("opentype");
 }
 
+@font-face {
+  font-family: quikhand;
+  src: url("resources/Quikhand.otf");
+}
+
 body {
   /*text-align: center;*/
   margin: 0;
@@ -29,13 +34,17 @@ a:hover {
 }
 
 img {
-  height: 600px;
   vertical-align: middle;
   display: inline-block;
 }
 
+#img1 {
+  height: 600px;
+}
+
 #img2, #img3 {
   display:none;
+  height: 600px;
 }
 
 label {
@@ -64,6 +73,10 @@ label {
   width: 1250px;
   text-align: center;
   margin: 0 auto;
+}
+
+.container h1 {
+  text-decoration: underline;
 }
 
 #nav {
@@ -112,23 +125,25 @@ label {
   background-repeat: repeat;
 }
 
+#header img {
+  margin-top: 15%;
+}
+
 #greeting {
-  /*font-family: 'Lato', sans-serif;*/
   color: #6d746f;
   font-weight: 700;
   font-size: 90px;
   letter-spacing: 2px;
-  top: 39%;
+  top: 5%;
   position: relative;
 }
 
 #name {
-  /*font-family: 'Lato', sans-serif;*/
   color: #6d746f;
   font-weight: 700;
   font-size: 60px;
   letter-spacing: 2px;
-  top: 45%;
+  top: 10%;
   position: relative;
   margin: auto;
 }
@@ -139,12 +154,11 @@ label {
 }
 
 #gallery h1 {
-  color: #5A4F65;
-  margin: 0;
-  font-weight: 700;
-  font-size: 60px;
+  /*color: #5A4F65;*/
+  font-size: 55px;
+  margin: 0 auto;
   padding: 20px 0 0 0;
-  overflow-x: auto;
+  font-family: typeWriter;
 }
 
 #pictures {
@@ -155,18 +169,20 @@ label {
 }
 
 #about {
+  font-family: quikhand;
   width: 100%;
   background-image: url('resources/fresh_snow.png');
   color: #272a28;
 }
 
-#content h1:first-child{
-  margin: 0 0 40.2px 0;
+#content h1 {
+  font-family: typeWriter;
+  margin: 0 auto;
+  padding: 20px 0 40.2px 0;
 }
 
 #content {
-  font-weight: 700;
-  font-size: 40px;
+  font-size: 30px;
   letter-spacing: 2px;
   position: relative;
   margin: auto;
@@ -177,6 +193,67 @@ label {
 #content a:hover {
   color: #6d746f;
 }
+
+/*This section modifies Resume div*/
+#resume {
+  background-image: url("resources/linedpaper.png");
+  font-family: quikhand;
+  font-size: 22px;
+}
+
+/*Title*/
+#resume p {
+  margin: 0 auto;
+}
+
+/*name and contact*/
+#resume h1 {
+  text-decoration: underline;
+  font-size: 45px;
+  margin: 0 auto;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-family: typeWriter;
+}
+
+#resume p:nth-child(4){
+  float:right;
+  font-size: 20px;
+  padding-right: 40px;
+}
+
+#resume h2 {
+  text-decoration: underline;
+  font-size: 30px;
+  margin: 0 auto;
+  padding-top: 30px;
+  font-family: typeWriter;
+}
+
+#resume p:nth-child(2) {
+  margin: 0 auto;
+  font-size: 30px;
+  float:right;
+  padding-right: 40px;
+}
+
+#resume hr {
+  clear: both;
+}
+
+/*Related Coursework*/
+
+#resume ul {
+  margin: 0px auto;
+}
+
+#resume ul li {
+  list-style: none;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+/*resume ends here*/
 
 #calendarSection {
   background-image: url('resources/food.png');

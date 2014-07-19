@@ -2,12 +2,22 @@
 $(document).ready(function(){
 
 //div effects
-  $("img").corner("30px");
-  $("#greeting,#name").hide();
+  $("img").corner("20px");
+  $("#img1,#img2,#img3").corner("30px");
+  $("#greeting,#name,#header img").hide();
   $("#greeting").fadeIn(2000);
-  $("#name").fadeIn(4000);
+  $("#name,#header img").fadeIn(4000);
   $("#content > a").fancybox({
     type: "iframe"
+  });
+  //my gallery
+  $(".fancybox").fancybox();
+  //resume
+  $("#resumelink").fancybox({
+    type: "iframe",
+    autoCenter: true,
+    width: 1250,
+    height: 750
   });
 
 //switch pictures
@@ -48,9 +58,6 @@ $(document).ready(function(){
         $("#img1").animate({opacity:1});
       }
   });
-
-//my gallery
-  $(".fancybox").fancybox();
 
 //scroll to a div function (navigation bar)
   function scrollToDiv (id){
