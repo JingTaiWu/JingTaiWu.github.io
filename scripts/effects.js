@@ -17,7 +17,8 @@ $(document).ready(function(){
     type: "iframe",
     autoCenter: true,
     width: 1250,
-    height: 750
+    height: 750,
+    autoSize: false
   });
 
 //switch pictures
